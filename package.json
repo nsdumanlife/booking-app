@@ -1,0 +1,20 @@
+{
+  "name": "booking-app",
+  "version": "1.0.0",
+  "description": "It is my project for Coyotiv Software Engineering School.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nsdumanlife/booking-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nsdumanlife/booking-app/issues"
+  },
+  "homepage": "https://github.com/nsdumanlife/booking-app#readme"
+}

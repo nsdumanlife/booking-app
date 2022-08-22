@@ -1,86 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="./stylesheets/style.css">
-</head>
-<body>
-
-
-  <div class="keys">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span class="sound">clap</span>
-    </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
-      <span class="sound">hihat</span>
-    </div>
-    <div data-key="68" class="key">
-      <kbd>D</kbd>
-      <span class="sound">kick</span>
-    </div>
-    <div data-key="70" class="key">
-      <kbd>F</kbd>
-      <span class="sound">openhat</span>
-    </div>
-    <div data-key="71" class="key">
-      <kbd>G</kbd>
-      <span class="sound">boom</span>
-    </div>
-    <div data-key="72" class="key">
-      <kbd>H</kbd>
-      <span class="sound">ride</span>
-    </div>
-    <div data-key="74" class="key">
-      <kbd>J</kbd>
-      <span class="sound">snare</span>
-    </div>
-    <div data-key="75" class="key">
-      <kbd>K</kbd>
-      <span class="sound">tom</span>
-    </div>
-    <div data-key="76" class="key">
-      <kbd>L</kbd>
-      <span class="sound">tink</span>
-    </div>
-  </div>
-  <div>Hello</div>
-  <div>World</div>
-
-  <audio data-key="65" src="sounds/clap.wav"></audio>
-  <audio data-key="83" src="sounds/hihat.wav"></audio>
-  <audio data-key="68" src="sounds/kick.wav"></audio>
-  <audio data-key="70" src="sounds/openhat.wav"></audio>
-  <audio data-key="71" src="sounds/boom.wav"></audio>
-  <audio data-key="72" src="sounds/ride.wav"></audio>
-  <audio data-key="74" src="sounds/snare.wav"></audio>
-  <audio data-key="75" src="sounds/tom.wav"></audio>
-  <audio data-key="76" src="sounds/tink.wav"></audio>
-
-<script>
-  function playSound(e) {
-    const audio = document.querySelector(`audio[data-key='${e.keyCode}']`)
-    const key = document.querySelector(`.key[data-key = '${e.keyCode}']`)
-    
-    if( !audio ) return; 
-    audio.currentTime = 0
-    audio.play()
-    key.classList.add('playing')
+class Bungalow {
+  constructor(location, capacity, price) {
+    this.location = location;
+    this.availability = true;
+    this.bookedDates = [];
+    this.city = "";
+    this.capacity = capacity;
+    this.price = price;
+    this.reviews = []; // user's reviews
+    this.rate = 0; // average stars are given by users
+    this.photos = []; //
+    this.services = []; // internet, barbecue,hot tub, pool, hot water, kitchen etc.
+    this.guests = [];
   }
-  
-  function removeTransition(e){
-    if(e.propertyName !== 'transform') return // skip it if it's not a transform
-    this.classList.remove('playing')
+}
+
+class User {
+  constructor(firstName, lastName, email, age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.age = age;
+    this.bookings = [];
+    this.reviews = [];
   }
 
-  const keys = document.querySelectorAll('.key')
-  
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition))
-  window.addEventListener('keydown', playSound )
-</script>
+  book(bungalow, checkInDate, checkOutDate) {
+    if (bungalow.availability) {
+      bungalow.guests.push(this);
+      this.bookings.push(); // how can i track the bookings? Do i need a booking class?
 
+      //TODO: check-in, check-out dates need to psuh booked dates
+      //    send confirmation email to user
+    }
+  }
+  review(bungalow, message) {
+    if (bungalow.guests.includes(this)) {
+      bungalow.reviews.push(message);
+      this.reviews.push(message);
+    }
+  }
+  pay() {}
+  cancel() {}
+}
 
-</body>
-</html>
+function signUp(firstName, lastName, email, age) {
+  return new User(firstName, lastName, email, age);
+}
+
+const dogancay = new Bungalow("Geyve, Sakarya, Turkey", 5, 1250);
+//const numan = new User("Numan", "Duman", "nsduman@gmail.com", 29);
+const numan = signUp("Numan", "Duman", "nsduman@gmail.com", 29);
+
+numan.book(dogancay, "22.08.2022", "29.08.2022");
+numan.review(
+  dogancay,
+  "It was a wonderful place, the view and the atmosphere were perfect!"
+);
+
+console.log(dogancay);
+console.log(numan);

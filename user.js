@@ -9,6 +9,10 @@ class User {
     // user id
   }
 
+  get profile() {
+    return `${this.firstName} has ${this.bookings.length} bookings.`;
+  }
+
   book(bungalow, checkInDate, checkOutDate) {
     //date object
     if (bungalow.availability) {
@@ -26,7 +30,7 @@ class User {
     }
   }
   pay() {}
-  cancel() {}
+  cancelBooking() {}
 }
 
 module.exports = User;

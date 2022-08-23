@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/nsdumanlife/booking-app/issues"
   },
-  "homepage": "https://github.com/nsdumanlife/booking-app#readme"
+  "homepage": "https://github.com/nsdumanlife/booking-app#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
 }

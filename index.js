@@ -11,6 +11,7 @@ class Bungalow {
     this.photos = []; //
     this.services = []; // internet, barbecue,hot tub, pool, hot water, kitchen etc.
     this.guests = [];
+    // id
   }
 }
 
@@ -22,14 +23,16 @@ class User {
     this.age = age;
     this.bookings = [];
     this.reviews = [];
+    // user id
   }
 
   book(bungalow, checkInDate, checkOutDate) {
+    //date object
     if (bungalow.availability) {
       bungalow.guests.push(this);
       this.bookings.push(); // how can i track the bookings? Do i need a booking class?
 
-      //TODO: check-in, check-out dates need to psuh booked dates
+      //TODO: check-in, check-out dates need to push booked dates
       //    send confirmation email to user
     }
   }

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "lint-all": "pretty-quick && eslint",
+    "start": "node src/index.js"
   },
   "husky": {
     "hooks": {

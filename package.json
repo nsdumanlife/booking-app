@@ -2,22 +2,47 @@
   "name": "booking-app",
   "version": "1.0.0",
   "description": "It is my project for Coyotiv Software Engineering School.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "lint-staged",
+    "lint-all": "pretty-quick && eslint",
+    "start": "node src/index.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "pretty-quick --staged",
+      "eslint --fix"
+    ],
+    "*.+(json|css|md)": [
+      "pretty-quick --staged"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nsdumanlife/booking-app.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Numan Selman Duman <numanselmanduman@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nsdumanlife/booking-app/issues"
   },
   "homepage": "https://github.com/nsdumanlife/booking-app#readme",
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
   }
 }

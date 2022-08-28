@@ -46,6 +46,7 @@
     "prettier": "^2.7.1"
   },
   "dependencies": {
-    "boxen": "^7.0.0"
+    "boxen": "^7.0.0",
+    "uuid": "^8.3.2"
   }
 }

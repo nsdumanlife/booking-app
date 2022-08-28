@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid')
+const getDuration = require('./get-duration')
 
 class Booking {
   constructor(guest, bungalow, checkInDate, checkOutDate) {
@@ -7,7 +8,11 @@ class Booking {
     this.bungalow = bungalow
     this.checkInDate = checkInDate
     this.checkOutDate = checkOutDate
-    this.status = 'confirmed' // confirmed, cancelled, denied
+    this.status = 'confirmed' // confirmed, cancelled
+  }
+
+  get duration() {
+    return getDuration(this.checkInDate, this.checkOutDate)
   }
 }
 

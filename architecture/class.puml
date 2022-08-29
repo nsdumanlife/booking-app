@@ -1,0 +1,93 @@
+@startuml Bungalow Booking Class Diagram
+class User{
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+    age: number
+    bookings: [Booking]
+    reviews: [Review]
+
+    constructor(firstName: string, lastName: string, email: string, age: number)
+    book(bungalow: Bungalow, checkInDate: Date, checkOutDate: Date)
+    review(booking: Booking)
+    pay()
+    cancelBooking(booking: Booking)
+}
+
+
+class Bungalow{
+    location: string
+    capacity: number
+    price: number
+    owner: Owner
+    bookings: [Booking]
+    bookedDates: [Date]
+    reviews: [Review]
+    rates: [number]
+    photos: Array
+    services: Array
+    rating: number
+
+    checkAvailability(checkInDate: Date, checkOutDate: Date,)
+}
+
+class Booking{
+    id: number
+    guest: User
+    bungalow: Bungalow
+    checkInDate: Date
+    checkOutDate: Date
+    isReviewed: boolean
+    status: string
+    duration: number
+    bookingDates: [string]
+
+    constructor(guest: User, bungalow: Bungalow, checkInDate: Date, checkOutDate: Date)
+    totalPrice(price: number, duration: number)
+}
+
+class Owner extends User{
+    ownedBungalow: Bungalow
+    changePrice(price: number)
+}
+
+class Review {
+    body: string
+    rating: number
+}
+
+class GetBookingDays {
+    getDays(startDate: Date, endDate: Date)
+}
+
+class GetDuration {
+    getDuration(startDate: Date, endDate: Date)
+}
+
+class SignUp{
+    signUp(firstName: string, lastName: string, email: string, age: number)
+}
+
+class Payment{
+    amount: number
+}
+
+Bungalow o-> Review
+User o-> Review
+
+User "1" --->"0..*" Booking
+Booking "1" --->"1" User
+Booking -> GetBookingDays
+Booking -> GetDuration
+Booking ---> Bungalow
+
+Owner "1" *- "1..*" Bungalow
+
+GetBookingDays --> GetDuration
+
+SignUp -> User
+
+Booking o--> Payment
+
+@enduml

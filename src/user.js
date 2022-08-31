@@ -25,7 +25,6 @@ class User {
 
       bungalow.bookings.push(newBooking)
       bungalow.bookedDates.push(...newBooking.bookingDays)
-      bungalow.bookedDates.push(newBooking.bookingDays[0], newBooking.bookingDays[1])
       this.bookings.push(newBooking)
 
       // TODO:

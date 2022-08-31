@@ -21,11 +21,11 @@ class User {
     if (checkInDate - Date.now() < 0) throw new Error('Enter a valid date for check-in date')
 
     if (bungalow.checkAvailability(checkInDate, checkOutDate)) {
-      // this.id or this.fullName or just this??
       const newBooking = new Booking(this, bungalow, checkInDate, checkOutDate)
 
       bungalow.bookings.push(newBooking)
-      bungalow.bookedDates.push(newBooking.bookingDays)
+      bungalow.bookedDates.push(...newBooking.bookingDays)
+      bungalow.bookedDates.push(newBooking.bookingDays[0], newBooking.bookingDays[1])
       this.bookings.push(newBooking)
 
       // TODO:

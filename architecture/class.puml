@@ -7,14 +7,20 @@ class User{
     age: number
     bookings: [Booking]
     reviews: [Review]
+    ownedBungalows: [Bungalow]
 
     constructor(firstName: string, lastName: string, email: string, age: number)
     book(bungalow: Bungalow, checkInDate: Date, checkOutDate: Date)
     review(booking: Booking)
     pay()
     cancelBooking(booking: Booking)
-}
+    signUp(firstName: string, lastName: string, email: string, password: string)
 
+    setPrice(bungalow: Bungalow, price: number)
+    disableDates(bungalow: Bungalow, startDate: Date, endDate: Date)
+    deleteBungalow(bungalow: Bungalow)
+    addBungalow()
+}
 
 class Bungalow{
     location: string
@@ -25,11 +31,12 @@ class Bungalow{
     bookedDates: [Date]
     reviews: [Review]
     rates: [number]
-    photos: Array
-    services: Array
-    rating: number
+    photos: [string]
+    services: [string]
+    get rating(): number
 
     checkAvailability(checkInDate: Date, checkOutDate: Date,)
+
 }
 
 class Booking{
@@ -38,35 +45,19 @@ class Booking{
     bungalow: Bungalow
     checkInDate: Date
     checkOutDate: Date
-    isReviewed: boolean
+    review: Review
     status: string
-    duration: number
-    bookingDates: [string]
+    get bookingDates() : [string]
 
     constructor(guest: User, bungalow: Bungalow, checkInDate: Date, checkOutDate: Date)
     totalPrice(price: number, duration: number)
 }
 
-class Owner extends User{
-    ownedBungalow: Bungalow
-    changePrice(price: number)
-}
-
 class Review {
     body: string
     rating: number
-}
-
-class GetBookingDays {
-    getDays(startDate: Date, endDate: Date)
-}
-
-class GetDuration {
-    getDuration(startDate: Date, endDate: Date)
-}
-
-class SignUp{
-    signUp(firstName: string, lastName: string, email: string, age: number)
+    owner: User
+    booking: Booking
 }
 
 class Payment{
@@ -74,20 +65,11 @@ class Payment{
 }
 
 Bungalow o-> Review
-User o-> Review
-
-User "1" --->"0..*" Booking
-Booking "1" --->"1" User
-Booking -> GetBookingDays
-Booking -> GetDuration
-Booking ---> Bungalow
-
-Owner "1" *- "1..*" Bungalow
-
-GetBookingDays --> GetDuration
-
-SignUp -> User
-
-Booking o--> Payment
+User o--> Review
+User "1" o-->"0..*" Booking
+Booking "1" o-->"1" User
+Booking "1" <--o "1" Bungalow
+Booking o--> Bungalow
+Booking o-> Payment
 
 @enduml
